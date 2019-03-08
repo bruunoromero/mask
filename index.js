@@ -8,7 +8,11 @@ const PDFDocument = require("pdfkit");
 const { PDFImage } = require("pdf-image");
 
 const convert = originalPath => {
-  const outputPdfName = path.basename(originalPath).split(".")[0] + "C.pdf";
+  const outputName = path.basename(originalPath).split(".")[0];
+  const outputPath = path.dirname(originalPath);
+
+  const outputPdf = `${outputPath}/${outputName}C.pdf`;
+
   const pdfImage = new PDFImage(originalPath, {
     convertExtension: "jpg",
     convertOptions: {
@@ -42,8 +46,7 @@ const convert = originalPath => {
       })
       .toFile(outputFile)
       .then(() => {
-        console.log(outputPdfName);
-        const stream = fs.createWriteStream(outputPdfName);
+        const stream = fs.createWriteStream(outputPdf);
         doc.pipe(stream);
         doc.image(outputFile, 18, 18, {
           fit: [outputHeight, outputWidth]
@@ -66,4 +69,8 @@ const cli = meow(`
       $ mask ./boleto.pdf
 `);
 
-convert(cli.input[0]);
+if (cli.input.length === 1) {
+  convert(cli.input[0]);
+} else {
+  cli.showHelp();
+}
