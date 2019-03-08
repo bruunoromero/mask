@@ -52,7 +52,7 @@ const convert = originalPath => {
         stream.on("finish", () => {
           fs.unlinkSync(image);
           fs.unlinkSync(outputFile);
-          console.log("Mal feito feito");
+          console.log("Mal feito, feito");
         });
       });
   });
