@@ -1,0 +1,12 @@
+{
+  "name": "ead-to-presencial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "meow": "^5.0.0",
+    "pdf-image": "^2.0.0",
+    "pdfkit": "^0.9.0",
+    "sharp": "^0.21.3"
+  }
+}
